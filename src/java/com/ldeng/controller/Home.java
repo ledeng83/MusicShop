@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ldeng.model.EntityManagerUtil;
-import com.ldeng.model.Instrument;
+import com.ldeng.model.Item;
 
 /**
  * Servlet implementation class Home
@@ -37,19 +37,6 @@ public class Home extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        Instrument inst = new Instrument();
-
-        try {
-            entityManager.getTransaction().begin();
-            inst.setType("guitar");
-            inst.setPrice(1023f);
-            inst.setDesc("This is a American Standard Stratocaster.");
-            entityManager.persist(inst);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-        }
 
         request.setAttribute("hello", "Welcome Test!");
 

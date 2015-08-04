@@ -6,34 +6,26 @@
 package com.ldeng.service;
 
 import com.ldeng.model.EntityManagerUtil;
-import com.ldeng.model.Instrument;
+import com.ldeng.model.Item;
 import javax.persistence.EntityManager;
 
 /**
  *
  * @author Le
  */
-public class InstrumentService {
+public class ItemService {
     
     EntityManager entityManager = EntityManagerUtil.getEntityManager();
         
-    public void saveInstrument (Instrument inst) {
+    public void saveItem (Item item) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(inst);
+            entityManager.persist(item);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
         }
     }
     
-    public void updateInstrument (Instrument inst) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(inst);
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-        }
-    }
+    
 }

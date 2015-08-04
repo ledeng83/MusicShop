@@ -12,11 +12,11 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class Instrument implements Serializable {
+public class Item implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Instrument() {
+    public Item() {
         super();
     }
 
@@ -24,13 +24,16 @@ public class Instrument implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(columnDefinition = "TEXT")
+    @Column
+    private String name;
+
+    @Column
     private String type;
 
-    @Column(columnDefinition = "FLOAT")
+    @Column
     private Float price;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "description")
     private String desc;
 
     public Integer getId() {
@@ -63,6 +66,20 @@ public class Instrument implements Serializable {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
