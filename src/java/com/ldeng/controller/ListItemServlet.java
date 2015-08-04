@@ -8,6 +8,9 @@ package com.ldeng.controller;
 import com.ldeng.model.Item;
 import com.ldeng.service.ItemService;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,22 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ldeng
  */
-@WebServlet(name = "AddItemServlet", urlPatterns = {"/AddItem"})
-public class AddItemServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
+@WebServlet(name = "ListItemServlet", urlPatterns = {"/ListItem"})
+public class ListItemServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -47,14 +36,21 @@ public class AddItemServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Item item = new Item();
-        item.setName(request.getParameter("name"));
-        item.setPrice(Float.parseFloat(request.getParameter("price")));
-        item.setType(request.getParameter("type"));
-        item.setDesc(request.getParameter("desc"));
 
-        ItemService is = new ItemService();
-        is.saveItem(item);
+        List<Item> itemList = new ArrayList<Item>();
+        ItemService itemService = new ItemService();
+        
+        for (Item i : itemList) {
+            System.out.println(i.getName());
+        }
+        
+        itemList = itemService.findAllItems();
+        
+        request.setAttribute("itemList", itemList);
+
+        RequestDispatcher rd = request.getRequestDispatcher("listItems.jsp");
+        rd.forward(request, response);
+
     }
 
     /**
@@ -68,7 +64,7 @@ public class AddItemServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**

@@ -9,6 +9,8 @@
     </head>
     <body>
         <h2>Welcome to Le's Music Shop</h2>
-        <a href="${pageContext.request.contextPath}/addItem.jsp">Add an Item</a>
+        <a href="${pageContext.request.contextPath}/addItem.jsp">Add an Item</a> <br><br>
+        <a href="ListItem">List All Items</a>
+
     </body>
 </html>
