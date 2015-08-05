@@ -1,6 +1,6 @@
 <%--
-    Document   : addInstrument
-    Created on : Aug 4, 2015, 11:13:29 AM
+    Document   : updateItem
+    Created on : Aug 5, 2015, 11:13:29 AM
     Author     : ldeng
 --%>
 
@@ -9,10 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add An Item</title>
+        <title>Update an Item</title>
     </head>
     <body>
-        <h3>Fill Information to Add an Item</h3><br>
+        <h3>Add an item</h3><br>
         <form action="AddItem" method="POST">
             <label for="name">Name: </label>
             <input type="text" name="name" id="name"><br>
@@ -24,6 +24,9 @@
             <label for="desc">Description: </label><br>
             <textarea name="desc" cols="40" rows="5" placeholder="Enter your description here..."></textarea><br><br>
             <input type="submit" name="submit" value="Submit">
+        </form> <br>
+        <form action="Home" method="GET">
+            <input type="submit" name="cancel" value="Cancel">
         </form>
     </body>
 </html>

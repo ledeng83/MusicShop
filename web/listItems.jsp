@@ -12,19 +12,24 @@
         <title>Item List</title>
     </head>
     <body>
-        <h3>Here is the list of instrument</h3><br>
+        <h3>Here is the list of items</h3><br>
 
-        <table>
+        <table border="1" style="width:70%">
             <tr>
-                <th>Item Name</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Price</th>
                 <th>Description</th>
+                <th colspan="2">Actions</th>
             </tr>
             <c:forEach items="${itemList}" var="item">
                 <tr>
                     <td><c:out value="${item.getName()}" /></td>
+                    <td><c:out value="${item.getType()}" /></td>
+                    <td><c:out value="${item.getPrice()}" /></td>
                     <td><c:out value="${item.getDesc()}" /></td>
                     <td><a href="RemoveItem?id=<c:out value="${item.getId()}"/>"/>Delete</a></td>
-                     <td><a href="RemoveItem?id=<c:out value="${item.getId()}"/>"/>Update</a></td>
+                    <td><a href="UpdateItem?id=<c:out value="${item.getId()}"/>"/>Update</a></td>
                 </tr>
             </c:forEach>
         </table>

@@ -45,4 +45,14 @@ public class ItemService {
         entityManager.getTransaction().commit();
     }
 
+    public void updateItem(Item item, Integer id) {
+        entityManager.getTransaction().begin();
+        Item itemForUpdate=entityManager.find(Item.class, id);
+        itemForUpdate.setName(item.getName());
+        itemForUpdate.setType(item.getType());
+        itemForUpdate.setPrice(item.getPrice());
+        itemForUpdate.setDesc(item.getDesc());
+        entityManager.getTransaction().commit();
+    }
+
 }

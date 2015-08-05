@@ -5,8 +5,12 @@
  */
 package com.ldeng.controller;
 
+import com.ldeng.model.EntityManagerUtil;
+import com.ldeng.model.Item;
+import com.ldeng.service.ItemService;
 import java.io.IOException;
-import java.io.PrintWriter;
+import javax.persistence.EntityManager;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +35,7 @@ public class UpdateItemServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -46,7 +50,15 @@ public class UpdateItemServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
+        Integer id = Integer.parseInt(request.getParameter("id"));
+
+        EntityManager entityManager = EntityManagerUtil.getEntityManager();
+        request.setAttribute("item", entityManager.find(Item.class, id));
+
+        RequestDispatcher rd = request.getRequestDispatcher("updateItem.jsp");
+        rd.forward(request, response);
+
     }
 
     /**
@@ -60,7 +72,22 @@ public class UpdateItemServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        Item item = new Item();
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        item.setName(request.getParameter("name"));
+        item.setPrice(Float.parseFloat(request.getParameter("price")));
+        item.setType(request.getParameter("type"));
+        item.setDesc(request.getParameter("desc"));
+
+        ItemService itemService = new ItemService();
+        itemService.updateItem(item, id);
+
+        request.setAttribute("item", item);
+
+        RequestDispatcher rd = request.getRequestDispatcher("updateItemSuccessful.jsp");
+        rd.forward(request, response);
+
     }
 
     /**
