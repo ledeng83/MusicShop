@@ -8,7 +8,6 @@ package com.ldeng.controller;
 import com.ldeng.model.Item;
 import com.ldeng.service.ItemService;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ldeng
+ * @author Le
  */
-@WebServlet(name = "AddItemServlet", urlPatterns = {"/AddItem"})
-public class AddItemServlet extends HttpServlet {
+@WebServlet(name = "RemoveItemServlet", urlPatterns = {"/RemoveItem"})
+public class RemoveItemServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,7 +32,7 @@ public class AddItemServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -48,7 +47,13 @@ public class AddItemServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        Item item = new Item();
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        ItemService itemService = new ItemService();
+        itemService.removeItem(id);
+        
+        response.sendRedirect("ListItem");
     }
 
     /**
@@ -62,17 +67,7 @@ public class AddItemServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Item item = new Item();
-        item.setName(request.getParameter("name"));
-        item.setPrice(Float.parseFloat(request.getParameter("price")));
-        item.setType(request.getParameter("type"));
-        item.setDesc(request.getParameter("desc"));
-
-        ItemService is = new ItemService();
-        is.saveItem(item);
-
-        RequestDispatcher rd = request.getRequestDispatcher("addItemSuccessful.jsp");
-        rd.forward(request, response);
+        processRequest(request, response);
     }
 
     /**

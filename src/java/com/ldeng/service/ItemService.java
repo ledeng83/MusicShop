@@ -20,29 +20,29 @@ public class ItemService {
     EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
     public void saveItem(Item item) {
-        
-            entityManager.getTransaction().begin();
-            entityManager.persist(item);
-            entityManager.getTransaction().commit();
-        
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(item);
+        entityManager.getTransaction().commit();
+
     }
 
     public List<Item> findAllItems() {
-        List<Item> itemList=null;
-        try {
-            entityManager.getTransaction().begin();
-            Query query = entityManager.createQuery("Select e From Item e");
-            itemList = (List<Item>) query.getResultList();
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        for (Item i : itemList) {
-            System.out.println(i.getName());
-        }
-        
+        List<Item> itemList = null;
+
+        entityManager.getTransaction().begin();
+        Query query = entityManager.createQuery("Select e From Item e");
+        itemList = (List<Item>) query.getResultList();
+        entityManager.getTransaction().commit();
+
         return itemList;
+    }
+
+    public void removeItem(Integer id) {
+        entityManager.getTransaction().begin();
+        Item item = entityManager.find(Item.class, id);
+        entityManager.remove(item);
+        entityManager.getTransaction().commit();
     }
 
 }

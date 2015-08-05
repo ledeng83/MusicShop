@@ -15,11 +15,23 @@
         <h3>Here is the list of instrument</h3><br>
 
         <table>
+            <tr>
+                <th>Item Name</th>
+                <th>Description</th>
+            </tr>
             <c:forEach items="${itemList}" var="item">
                 <tr>
-                    <td><c:out value="${itemList}" /></td>
+                    <td><c:out value="${item.getName()}" /></td>
+                    <td><c:out value="${item.getDesc()}" /></td>
+                    <td><a href="RemoveItem?id=<c:out value="${item.getId()}"/>"/>Delete</a></td>
+                     <td><a href="RemoveItem?id=<c:out value="${item.getId()}"/>"/>Update</a></td>
                 </tr>
             </c:forEach>
         </table>
+
+        <br><br>
+
+        <a href="Home" >Back</a>
+
     </body>
 </html>
